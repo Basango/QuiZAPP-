@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "blaggs",
   "main": "index.js",
-  "scripts": {
-    "test": "npx tailwindcss -i ./src/styles.css -o ./src/output.css --watch"
-  },
+  
   "author": "Neil Bastian",
   "license": "ISC",
   "dependencies": {
