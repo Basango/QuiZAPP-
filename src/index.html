@@ -10,6 +10,7 @@
 </head>
 
 <body class="bg-gray-100">
+    <img src="QUIZAPP.png" width="300" class="mx-auto my-auto ">
     <div class="flex justify-center items-center h-screen">
         <button id="startBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Start the Test</button>
     </div>
@@ -25,22 +26,45 @@
                     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
                 </head>
                 <body class="bg-gray-200">
-                    <h1 class="text-2xl font-bold text-center my-4">Exam Rules</h1>
-                    <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div id="questionContainer"></div>
+                    <div class="flex justify-center mt-4">
+                        <button id="prevBtn" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Previous</button>
+                        <button id="nextBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">Next</button>
+                    </div>
                 </body>
                 </html>
             `);
 
             setTimeout(() => {
-                newWindow.document.body.innerHTML = `
-                    <h1 class="text-2xl font-bold text-center my-4">Question 1</h1>
-                    <input type="text" placeholder="Your Answer" class="block mx-auto my-4 p-2 border border-gray-300 rounded">
-                    <button id="submitBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit Answer</button>
-                `;
-                
+                let currentQuestion = 1;
+
+                function displayQuestion(questionNumber) {
+                    newWindow.document.getElementById('questionContainer').innerHTML = `
+                        <h1 class="text-2xl font-bold text-center my-4">Question ${questionNumber}</h1>
+                        <input type="text" placeholder="Your Answer" class="block mx-auto my-4 p-2 border border-gray-300 rounded">
+                        <button id="submitBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit Answer</button>
+                    `;
+                }
+
+                displayQuestion(currentQuestion);
+
                 const submitBtn = newWindow.document.getElementById('submitBtn');
                 submitBtn.addEventListener('click', () => {
-                    // Logic to submit answer and move to the next question
+                    // Handle submission
+                });
+
+                const prevBtn = newWindow.document.getElementById('prevBtn');
+                prevBtn.addEventListener('click', () => {
+                    if (currentQuestion > 1) {
+                        currentQuestion--;
+                        displayQuestion(currentQuestion);
+                    }
+                });
+
+                const nextBtn = newWindow.document.getElementById('nextBtn');
+                nextBtn.addEventListener('click', () => {
+                    currentQuestion++;
+                    displayQuestion(currentQuestion);
                 });
             }, 2000);
         });
